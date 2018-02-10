@@ -47,12 +47,12 @@ class ThnxBlockFooterText extends Module implements WidgetInterface
             || !$this->registerHook('displayFooterAfter')) {
             return false;
         }
-            Configuration::updateValue('thnxfootercopycolumn','12');
-            Configuration::updateValue('thnxfootercopyfloat','disable');
+            Configuration::updateValue('thnxfootercopycolumn', '12');
+            Configuration::updateValue('thnxfootercopyfloat', 'disable');
             $langs = Language::getLanguages();
-            foreach ($langs as $l) {
-                Configuration::updateValue('thnxblockfootertext_'.$l['id_lang'],'Copyright @ 2017 <a href="#">Platinum</a>. All rights reserved.');
-            }
+        foreach ($langs as $l) {
+            Configuration::updateValue('thnxblockfootertext_'.$l['id_lang'], 'Copyright @ 2017 <a href="#">Platinum</a>. All rights reserved.');
+        }
             return true;
     }
     public function uninstall()
@@ -64,15 +64,15 @@ class ThnxBlockFooterText extends Module implements WidgetInterface
             return false;
         }
             $langs = Language::getLanguages();
-            foreach ($langs as $l) {
-                    Configuration::deleteByName('thnxblockfootertext_'.$l['id_lang']);
-            }
+        foreach ($langs as $l) {
+                Configuration::deleteByName('thnxblockfootertext_'.$l['id_lang']);
+        }
             return true;
     }
     public function renderWidget($hookName = null, $configuration = array())
     {
-        $this->smarty->assign($this->getWidgetVariables($hookName,$configuration));
-        return $this->fetch('module:'.$this->name.'/views/templates/front/'.$this->name.'.tpl');    
+        $this->smarty->assign($this->getWidgetVariables($hookName, $configuration));
+        return $this->fetch('module:'.$this->name.'/views/templates/front/'.$this->name.'.tpl');
     }
     public function getWidgetVariables($hookName = null, $configuration = array())
     {
@@ -86,17 +86,17 @@ class ThnxBlockFooterText extends Module implements WidgetInterface
         $return_arr['thnxblockfootertext'] = $thnxblockfootertext;
         $return_arr['thnxfootercopycolumn'] = Configuration::get('thnxfootercopycolumn');
         $return_arr['thnxfootercopyfloat'] = Configuration::get('thnxfootercopyfloat');
-        return $return_arr;    
+        return $return_arr;
     }
     public function postProcess()
     {
         if (Tools::isSubmit('submit'.$this->name)) {
             $langs = Language::getLanguages();
             foreach ($langs as $l) {
-                Configuration::updateValue('thnxblockfootertext_'.$l['id_lang'],Tools::getValue('thnxblockfootertext_'.$l['id_lang']), true);
+                Configuration::updateValue('thnxblockfootertext_'.$l['id_lang'], Tools::getValue('thnxblockfootertext_'.$l['id_lang']), true);
             }
-            Configuration::updateValue('thnxfootercopycolumn',Tools::getValue('thnxfootercopycolumn'), true);
-            Configuration::updateValue('thnxfootercopyfloat',Tools::getValue('thnxfootercopyfloat'), true);
+            Configuration::updateValue('thnxfootercopycolumn', Tools::getValue('thnxfootercopycolumn'), true);
+            Configuration::updateValue('thnxfootercopyfloat', Tools::getValue('thnxfootercopyfloat'), true);
             return $this->displayConfirmation($this->l('The settings have been updated.'));
         }
         return '';
