@@ -43,12 +43,12 @@ class thnxblockfootertext extends Module implements WidgetInterface
 			}
 			return true;
 	}
-	public function renderWidget($hookName = null, array $configuration = [])
+	public function renderWidget($hookName = null, $configuration = array())
 	{
 	    $this->smarty->assign($this->getWidgetVariables($hookName,$configuration));
 	    return $this->fetch('module:'.$this->name.'/views/templates/front/'.$this->name.'.tpl');	
 	}
-	public function getWidgetVariables($hookName = null, array $configuration = [])
+	public function getWidgetVariables($hookName = null, $configuration = array())
 	{
 		$return_arr = array();
 	    $id_lang = (int)$this->context->language->id;
